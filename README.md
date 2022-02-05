@@ -1,5 +1,10 @@
 # IntegracaoContinua.Csharp
 
+[![Licensed under the MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Build](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/workflows/Build/badge.svg?branch=main)](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/actions/workflows/build.yml)
+[![Integration Tests](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/workflows/Integration%20Tests/badge.svg?branch=main)](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/actions/workflows/integration-tests.yml)
+[![codecov](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp/branch/main/graph/badge.svg?token=6YLN9GKD8X)](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp)
+
 Um projeto para fazer testes de configuração para integração contínua usando [GitHub Actions] e o [Azure Pipelines] além de que todo o projeto será feito com [Vscode], para não depender de recursos do [Visual Studio]. Já o código será feito com [.NET Core 3.1] e os testes em [.NET 5].
 
 ## Requisitos
