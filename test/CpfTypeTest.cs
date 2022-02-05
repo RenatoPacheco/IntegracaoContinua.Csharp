@@ -109,5 +109,55 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(expected, inputValue.Equals(compareValue));            
             Assert.Equal(!expected, inputValue != compareValue);
         }
+
+        [Theory]
+        [InlineData("153.179.966-35", "153.179.966-35", true)]
+        [InlineData("153.179.966-35", "15317996635", true)]
+        [InlineData("153.179.966-35", "183.132.538-19", false)]
+        [InlineData("153.179.966-35", "any value", false)]
+        public void Compare_get_hash_code(string input, string compare, bool expected)
+        {
+            CpfType inputValue = new(input);
+            CpfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue.GetHashCode() == compareValue.GetHashCode());
+        }
+
+        [Fact]
+        public void Compare_equal_as_object()
+        {
+            CpfType compare = new ("153.179.966-35");
+
+            Assert.False(compare.Equals(null));
+            Assert.False(compare.Equals(compare.ToString()));
+            Assert.False(compare.Equals(compare.ToString("n")));
+        }
+
+        [Theory]
+        [InlineData("253.179.966-35", "153.179.966-35", true)]
+        [InlineData("153.179.966-35", "253.179.966-35", false)]
+        public void Compare_greater_than(string input, string compare, bool expected)
+        {
+            CpfType inputValue = new(input);
+            CpfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue > compareValue);
+            Assert.Equal(!expected, inputValue < compareValue);
+        }
+
+        [Fact]
+        public void Compare_greater_than_as_object()
+        {
+            CpfType compare = new ("153.179.966-35");
+
+            Assert.Equal(-1,compare.CompareTo(null));
+            Assert.Equal(-1,compare.CompareTo(compare.ToString()));
+            Assert.Equal(-1,compare.CompareTo(compare.ToString("n")));
+        }
+
+        [Fact]
+        public void Check_get_type_code_has_string()
+        {
+            CpfType compare = new ("153.179.966-35");
+            Assert.Equal(TypeCode.String, compare.GetTypeCode());
+        }
     }
 }
