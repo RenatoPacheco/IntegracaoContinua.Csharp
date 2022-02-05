@@ -19,19 +19,19 @@ namespace IntegracaoContinua.Csharp
         private string _value;
         private bool _isValid;
 
-        public static implicit operator string(CpfType input) => input.ToString();
-        public static implicit operator CpfType(string input) => new CpfType(input);
+        public static explicit operator string(CpfType input) => input.ToString();
+        public static explicit operator CpfType(string input) => new CpfType(input);
 
         /// <summary>
         /// Return value 000.000.000-00
         /// </summary>
         public static readonly CpfType Empty = new CpfType { _value = "000.000.000-00" };
 
-        public static void Parse(string input, out CpfType output)
+        public static CpfType Parse(string input)
         {
             if (TryParse(input, out CpfType result))
             {
-                output = result;
+                return result;
             }
             else
             {
@@ -178,18 +178,7 @@ namespace IntegracaoContinua.Csharp
 
         public int CompareTo(object obj)
         {
-            if (obj is null)
-            {
-                return 1;
-            }
-
-            if (obj is CpfType phone)
-            {
-                return CompareTo(phone);
-            }
-
-            throw new ArgumentException(
-                nameof(obj), Resource.ItIsNotAValidType);
+            return obj is CpfType other ? CompareTo(other) : -1;
         }
 
         public static bool operator ==(CpfType left, CpfType right)
