@@ -70,15 +70,6 @@ namespace IntegracaoContinua.Csharp.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is not a valid type.
-        /// </summary>
-        internal static string ItIsNotAValidType {
-            get {
-                return ResourceManager.GetString("ItIsNotAValidType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to It is  not in a valid format.
         /// </summary>
         internal static string ItIsNotInAValidFormat {

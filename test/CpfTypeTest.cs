@@ -19,6 +19,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [InlineData("")]
         [InlineData(null)]
         [InlineData("153.179.966-00")]
+        [InlineData("000.000.000-12")]
         [InlineData("15317996600")]
         public void Check_format_is_invalid(string input)
         {
