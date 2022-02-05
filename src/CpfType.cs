@@ -168,7 +168,7 @@ namespace IntegracaoContinua.Csharp
 
         public override bool Equals(object obj)
         {
-            return obj is CpfType phone && Equals(phone);
+            return obj is CpfType cpf && Equals(cpf);
         }
 
         public int CompareTo(CpfType other)

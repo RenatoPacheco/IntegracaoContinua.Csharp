@@ -159,5 +159,50 @@ namespace IntegracaoContinua.Csharp.Teste
             CpfType compare = new ("153.179.966-35");
             Assert.Equal(TypeCode.String, compare.GetTypeCode());
         }
+        
+
+        [Theory]
+        [InlineData("153.179.966-35", typeof(string), true)]
+        [InlineData("any value", typeof(string), true)]
+        [InlineData("153.179.966-35", typeof(bool), false)]
+        [InlineData("true", typeof(bool), true)]
+        [InlineData("153.179.966-35", typeof(char), false)]
+        [InlineData("n", typeof(char), true)]
+        [InlineData("153.179.966-35", typeof(sbyte), false)]
+        [InlineData("1", typeof(sbyte), true)]
+        [InlineData("153.179.966-35", typeof(byte), false)]
+        [InlineData("1", typeof(byte), true)]
+        [InlineData("153.179.966-35", typeof(Int16), false)]
+        [InlineData("1", typeof(Int16), true)]
+        [InlineData("153.179.966-35", typeof(Int32), false)]
+        [InlineData("1", typeof(Int32), true)]
+        [InlineData("153.179.966-35", typeof(Int64), false)]
+        [InlineData("1", typeof(Int64), true)]
+        [InlineData("153.179.966-35", typeof(UInt16), false)]
+        [InlineData("1", typeof(UInt16), true)]
+        [InlineData("153.179.966-35", typeof(UInt32), false)]
+        [InlineData("1", typeof(UInt32), true)]
+        [InlineData("153.179.966-35", typeof(UInt64), false)]
+        [InlineData("1", typeof(UInt64), true)]
+        [InlineData("153.179.966-35", typeof(Single), false)]
+        [InlineData("1", typeof(Single), true)]
+        [InlineData("153.179.966-35", typeof(Double), false)]
+        [InlineData("1", typeof(Double), true)]
+        [InlineData("153.179.966-35", typeof(Decimal), false)]
+        [InlineData("1", typeof(Decimal), true)]
+        [InlineData("153.179.966-35", typeof(DateTime), false)]
+        [InlineData("2021-01-01", typeof(DateTime), true)]
+        public void Check_convertible_success(string input, Type type, bool expectedSuccess)
+        {
+            CpfType test = new(input);
+            
+            if (!expectedSuccess) {
+                Assert.Throws<FormatException>(() => Convert.ChangeType(test, type));
+                Assert.Throws<FormatException>(() => (test as IConvertible).ToType(type, null));
+            } else {
+                Convert.ChangeType(test, type);
+                (test as IConvertible).ToType(type, null);
+            }
+        }
     }
 }
