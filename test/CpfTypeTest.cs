@@ -106,9 +106,8 @@ namespace IntegracaoContinua.Csharp.Teste
             CpfType inputValue = new(input);
             CpfType compareValue = new(compare);
             Assert.Equal(expected, inputValue == compareValue);
-            Assert.Equal(expected, inputValue.Equals(compareValue));
-            Assert.Equal(expected, inputValue.Equals(compareValue.ToString()));
-
+            Assert.Equal(expected, inputValue.Equals(compareValue));            
+            Assert.Equal(!expected, inputValue != compareValue);
         }
     }
 }
