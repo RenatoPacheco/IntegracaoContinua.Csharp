@@ -36,6 +36,7 @@ jobs:
         name: Test report       # Name of the check run which will be created
         path: '**/*.trx'        # Path to test results
         reporter: dotnet-trx    # Format of test results
+        'fail-on-error': false   # Fail the workflow if the test results contain errors
 
     - name: Coverage Reporter
       uses: codecov/codecov-action@v2
