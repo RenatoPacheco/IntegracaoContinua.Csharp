@@ -51,7 +51,7 @@ jobs:
         verbose: true
 
     - name: Copy Coverage To Predictable Location
-      run: cp **/coverage.cobertura.xml coverage.cobertura.xml
+      run: cp '**/coverage.cobertura.xml' coverage.cobertura.xml
       if: success() || failure()  
 
     - name: Code Coverage Summary Report
