@@ -30,20 +30,20 @@ Para gerar o relatório de testes, execute o comando abaixo:
 ```bash
 dotnet restore
 dotnet build --configuration=Release --no-restore
-dotnet test --no-build --verbosity=normal --collect:"XPlat Code Coverage"
-reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:test/TestResults/CoverageReport" -reporttypes:Html
+dotnet test --no-build --verbosity=normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+reportgenerator "-reports:coverage/**/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
 ```
 
-A partir da execução, o comando irá gerar um relatório de testes no diretório **test/TestResults/CoverageReport**.
+A partir da execução, o comando irá gerar um relatório de testes no diretório **./coverage/report**.
 
-Porém, a partir da segunda execução, pode haver problemas no relatório, pois ele lê todos os XMLs que encontrar no diretório, e não só o gerado pela primeira execução. Para resolver isso, é necessário apagar o diretório **test/TestResults** e executar o comando novamente. 
+Porém, a partir da segunda execução, pode haver problemas no relatório, pois ele lê todos os XMLs que encontrar no diretório, e não só o gerado pela primeira execução. Para resolver isso, é necessário apagar o diretório **./coverage** e executar o comando novamente. 
 
 ```bash
-rm -rf test/TestResults
+rm -rf ./coverage
 dotnet restore
 dotnet build --configuration=Release --no-restore
-dotnet test --no-build --verbosity=normal --collect:"XPlat Code Coverage"
-reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:test/TestResults/CoverageReport" -reporttypes:Html
+dotnet test --no-build --verbosity=normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+reportgenerator "-reports:coverage/**/coverage.cobertura.xml" "-targetdir:coverage/report" -reporttypes:Html
 ```
 
 E para não ter de ficar executando cada comando a cada teste que queirar gerar o relatório, criei um [buildReport.sh](./buildReport.sh) para pra facilitar, assim é só executar o shell script abaixo:
