@@ -4,13 +4,13 @@ using System.Text.RegularExpressions;
 
 namespace IntegracaoContinua.Csharp
 {
-    public struct CpfType
+    public struct CepType
         : IFormattable, IComparable,
-        IComparable<CpfType>, IEquatable<CpfType>, IConvertible
+        IComparable<CepType>, IEquatable<CepType>, IConvertible
     {
-        public CpfType(string input)
+        public CepType(string input)
         {
-            TryParse(input, out CpfType output);
+            TryParse(input, out CepType output);
             this = output;
             if (!IsValid())
                 _value = input?.Trim() ?? string.Empty;
@@ -19,17 +19,17 @@ namespace IntegracaoContinua.Csharp
         private string _value;
         private bool _isValid;
 
-        public static explicit operator string(CpfType input) => input.ToString();
-        public static explicit operator CpfType(string input) => new CpfType(input);
+        public static explicit operator string(CepType input) => input.ToString();
+        public static explicit operator CepType(string input) => new CepType(input);
 
         /// <summary>
         /// Return value 000.000.000-00
         /// </summary>
-        public static readonly CpfType Empty = new CpfType { _value = "000.000.000-00" };
+        public static readonly CepType Empty = new CepType { _value = "000.000.000-00" };
 
-        public static CpfType Parse(string input)
+        public static CepType Parse(string input)
         {
-            if (TryParse(input, out CpfType result))
+            if (TryParse(input, out CepType result))
             {
                 return result;
             }
@@ -44,19 +44,23 @@ namespace IntegracaoContinua.Csharp
             }
         }
 
-        public static bool TryParse(string input, out CpfType output)
+        public static bool TryParse(string input, out CepType output)
         {
             input = input?.Trim();
             if (!string.IsNullOrEmpty(input))
             {
-                string pattern = @"^\d{3}[\. ]?\d{3}[\. ]?\d{3}[\- ]?\d{2}$";
+                string pattern = @"^\d{5}[\- ]?\d{3}$";
                 if (Regex.IsMatch(input, pattern))
                 {
                     input = Regex.Replace(input, @"[^\d]", string.Empty);
-                    output = GenerateDigit(input.Substring(0, 9));
-
-                    if (output.ToString("N") == input)
-                        return true;
+                    pattern = @"^(\d{5})(\d{3})$";
+                    
+                    output = new CepType
+                    {
+                        _value = Regex.Replace(input, pattern, "$1-$2"),
+                        _isValid = true
+                    };
+                    return true;
                 }
             }
             output = Empty;
@@ -66,57 +70,19 @@ namespace IntegracaoContinua.Csharp
         /// <summary>
         /// Generate a valid CPF
         /// </summary>
-        /// <returns>A object CpfType with a CPF valid</returns>
-        public static CpfType Generate()
+        /// <returns>A object CepType with a CPF valid</returns>
+        public static CepType Generate()
         {
-            string partialValue = string.Empty;
-            for (int i = 0; i < 9; i++)
-                partialValue += new Random().Next(0, 9).ToString();
+            string result = string.Empty;
+            for (int i = 0; i < 8; i++) {
+                if (i == 5) {
+                    result += "-";
+                }
+                result += new Random().Next(0, 9).ToString();
+            }
 
-            return GenerateDigit(partialValue);
+            return new CepType(result);
         }
-
-        private static CpfType GenerateDigit(string partialValue)
-        {
-            int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-            string tempCpf;
-            string digito;
-            int soma;
-            int resto;
-
-            tempCpf = partialValue;
-            soma = 0;
-
-            for (int i = 0; i < 9; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
-            resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = resto.ToString();
-            tempCpf = tempCpf + digito;
-            soma = 0;
-            for (int i = 0; i < 10; i++)
-                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
-            resto = soma % 11;
-            if (resto < 2)
-                resto = 0;
-            else
-                resto = 11 - resto;
-            digito = digito + resto.ToString();
-
-            string pattern = @"^(\d{3})(\d{3})(\d{3})(\d{2})$";
-            return new CpfType
-            {
-                _value = Regex.Replace(
-                    partialValue + digito,
-                    pattern, "$1.$2.$3-$4"),
-                _isValid = true
-            };
-        }
-
         public bool IsValid() => _isValid;
 
         public override string ToString()
@@ -161,42 +127,42 @@ namespace IntegracaoContinua.Csharp
             return $"{_value}:{GetType()}".GetHashCode();
         }
 
-        public bool Equals(CpfType other)
+        public bool Equals(CepType other)
         {
             return _value == other._value;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is CpfType value && Equals(value);
+            return obj is CepType value && Equals(value);
         }
 
-        public int CompareTo(CpfType other)
+        public int CompareTo(CepType other)
         {
             return _value.CompareTo(other._value);
         }
 
         public int CompareTo(object obj)
         {
-            return obj is CpfType other ? CompareTo(other) : -1;
+            return obj is CepType other ? CompareTo(other) : -1;
         }
 
-        public static bool operator ==(CpfType left, CpfType right)
+        public static bool operator ==(CepType left, CepType right)
         {
             return left.Equals(right);
         }
 
-        public static bool operator !=(CpfType left, CpfType right)
+        public static bool operator !=(CepType left, CepType right)
         {
             return !(left == right);
         }
 
-        public static bool operator >(CpfType left, CpfType right)
+        public static bool operator >(CepType left, CepType right)
         {
             return left.CompareTo(right) == 1;
         }
 
-        public static bool operator <(CpfType left, CpfType right)
+        public static bool operator <(CepType left, CepType right)
         {
             return left.CompareTo(right) == -1;
         }
