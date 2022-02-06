@@ -162,7 +162,7 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(TypeCode.String, compare.GetTypeCode());
         }
         
-
+        /*
         [Theory]
         [InlineData("SP", typeof(string), true)]
         [InlineData("any value", typeof(string), true)]
@@ -205,6 +205,6 @@ namespace IntegracaoContinua.Csharp.Teste
                 Convert.ChangeType(test, type);
                 (test as IConvertible).ToType(type, null);
             }
-        }
+        }*/
     }
 }
