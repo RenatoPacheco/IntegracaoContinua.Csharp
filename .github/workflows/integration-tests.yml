@@ -27,7 +27,7 @@ jobs:
       run: dotnet build --no-restore
     
     - name: Test
-      run: dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage"
+      run: dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
 
     - name: Test Reporter
       uses: dorny/test-reporter@v1.5.0
@@ -51,7 +51,7 @@ jobs:
         verbose: true
 
     - name: Copy Coverage To Predictable Location
-      run: cp '**/coverage.cobertura.xml' coverage.cobertura.xml
+      run: cp coverage/**/coverage.cobertura.xml coverage.cobertura.xml
       if: success() || failure()  
 
     - name: Code Coverage Summary Report
