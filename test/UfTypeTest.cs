@@ -75,8 +75,6 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("SP", null, "SP")]
         [InlineData("SP", "", "SP")]
-        [InlineData("SP", "d", "SP")]
-        [InlineData("SP", "n", "SP")]
         public void Check_to_string_format(string input, string format, string expected)
         {
             UfType test = new(input);
@@ -125,12 +123,11 @@ namespace IntegracaoContinua.Csharp.Teste
 
             Assert.False(compare.Equals(null));
             Assert.False(compare.Equals(compare.ToString()));
-            Assert.False(compare.Equals(compare.ToString("n")));
         }
 
         [Theory]
-        [InlineData("SP", "MG", true)]
-        [InlineData("SP", "AC", false)]
+        [InlineData("SP", "AC", true)]
+        [InlineData("SP", "TO", false)]
         public void Compare_greater_than(string input, string compare, bool expected)
         {
             UfType inputValue = new(input);
@@ -146,7 +143,6 @@ namespace IntegracaoContinua.Csharp.Teste
 
             Assert.Equal(-1,compare.CompareTo(null));
             Assert.Equal(-1,compare.CompareTo(compare.ToString()));
-            Assert.Equal(-1,compare.CompareTo(compare.ToString("n")));
         }
 
         [Fact]

@@ -78,7 +78,11 @@ namespace IntegracaoContinua.Csharp
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            return _value;
+            if (format == string.Empty || format == null)
+                return _value;
+            else
+                throw new ArgumentException(
+                    nameof(format), Resource.TheValueIsNotValid);
         }
 
         public override int GetHashCode()
