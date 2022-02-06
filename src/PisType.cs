@@ -19,8 +19,8 @@ namespace IntegracaoContinua.Csharp
         private string _value;
         private bool _isValid;
 
-        public static implicit operator string(PisType input) => input.ToString();
-        public static implicit operator PisType(string input) => new PisType(input);
+        public static explicit operator string(PisType input) => input.ToString();
+        public static explicit operator PisType(string input) => new PisType(input);
 
         /// <summary>
         /// Return value 000.00000.00-0
