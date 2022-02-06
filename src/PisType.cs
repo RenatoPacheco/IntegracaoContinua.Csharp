@@ -27,11 +27,11 @@ namespace IntegracaoContinua.Csharp
         /// </summary>
         public static readonly PisType Empty = new PisType { _value = "000.00000.00-0" };
 
-        public static void Parse(string input, out PisType output)
+        public static PisType Parse(string input)
         {
             if (TryParse(input, out PisType result))
             {
-                output = result;
+                return result;
             }
             else
             {
