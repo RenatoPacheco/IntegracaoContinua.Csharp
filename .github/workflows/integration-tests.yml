@@ -33,9 +33,10 @@ jobs:
       uses: dorny/test-reporter@v1.5.0
       if: success() || failure()  
       with:
-        name: XUnit Tests    # Name of the check run which will be created
-        path: '**/*.trx'     # Path to test results
-        reporter: dotnet-trx # Format of test results       # Format of test results
+        name: XUnit Tests       # Name of the check run which will be created
+        path: '**/*.trx'        # Path to test results
+        reporter: dotnet-trx    # Format of test results
+        fail-on-error: 'false'   # Fail the workflow if any test fails
 
     - name: Coverage Reporter
       uses: codecov/codecov-action@v2
