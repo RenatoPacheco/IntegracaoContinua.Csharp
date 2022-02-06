@@ -192,7 +192,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [InlineData("153.179.966-35", typeof(Decimal), false)]
         [InlineData("1", typeof(Decimal), true)]
         [InlineData("153.179.966-35", typeof(DateTime), false)]
-        [InlineData("2021-01-01", typeof(DateTime), true)]
+        [InlineData("2021-01-01", typeof(DateTime), false)]
         public void Check_convertible_success(string input, Type type, bool expectedSuccess)
         {
             CpfType test = new(input);
