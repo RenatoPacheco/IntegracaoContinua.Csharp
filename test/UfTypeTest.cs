@@ -7,9 +7,8 @@ namespace IntegracaoContinua.Csharp.Teste
     {
         [Theory]
         [InlineData("SP", "SP")]
-        [InlineData("01234 567", "SP")]
-        [InlineData("01234567", "SP")]
-        [InlineData(" 01234567 ", "SP")]
+        [InlineData("sp", "SP")]
+        [InlineData(" SP ", "SP")]
         public void Check_format_is_valid(string input, string expected)
         {
             UfType test = new(input);
@@ -20,10 +19,9 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        [InlineData("01234   567")]
-        [InlineData("SP-89")]
+        [InlineData("S P")]
+        [InlineData("SPS")]
         [InlineData("01234")]
-        [InlineData("01234-abc")]
         public void Check_format_is_invalid(string input)
         {
             UfType test = new(input);
@@ -33,9 +31,8 @@ namespace IntegracaoContinua.Csharp.Teste
 
         [Theory]
         [InlineData("SP", "SP")]
-        [InlineData("01234 567", "SP")]
-        [InlineData("01234567", "SP")]
-        [InlineData(" 01234567 ", "SP")]
+        [InlineData("sp", "SP")]
+        [InlineData(" SP ", "SP")]
         public void Check_explicit_to_uf_is_valid(string input, string expected)
         {
             UfType test = (UfType)input;
@@ -45,9 +42,8 @@ namespace IntegracaoContinua.Csharp.Teste
 
         [Theory]
         [InlineData("SP", "SP")]
-        [InlineData("01234 567", "SP")]
-        [InlineData("01234567", "SP")]
-        [InlineData(" 01234567 ", "SP")]
+        [InlineData("sp", "SP")]
+        [InlineData(" SP ", "SP")]
         public void Check_explicit_to_string_is_valid(string input, string expected)
         {
             UfType test = (UfType)input;
@@ -58,10 +54,9 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("")]
         [InlineData(null)]
-        [InlineData("01234   567")]
-        [InlineData("SP-89")]
+        [InlineData("S P")]
+        [InlineData("SPS")]
         [InlineData("01234")]
-        [InlineData("01234-abc")]
         public void Check_parse_invalid(string input)
         {
             Assert.Throws<ArgumentException>(() => UfType.Parse(input));
@@ -69,9 +64,8 @@ namespace IntegracaoContinua.Csharp.Teste
         
         [Theory]
         [InlineData("SP")]
-        [InlineData("01234 567")]
-        [InlineData("01234567")]
-        [InlineData(" 01234567 ")]
+        [InlineData("sp")]
+        [InlineData(" SP ")]
         public void Check_parse_valid(string input)
         {
             UfType test = UfType.Parse(input);
@@ -82,7 +76,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [InlineData("SP", null, "SP")]
         [InlineData("SP", "", "SP")]
         [InlineData("SP", "d", "SP")]
-        [InlineData("SP", "n", "01234567")]
+        [InlineData("SP", "n", "SP")]
         public void Check_to_string_format(string input, string format, string expected)
         {
             UfType test = new(input);
@@ -100,7 +94,7 @@ namespace IntegracaoContinua.Csharp.Teste
 
         [Theory]
         [InlineData("SP", "SP", true)]
-        [InlineData("SP", "01234567", true)]
+        [InlineData("sp", "SP", true)]
         [InlineData("SP", "01234-000", false)]
         [InlineData("SP", "any value", false)]
         public void Compare_equal(string input, string compare, bool expected)
@@ -114,8 +108,8 @@ namespace IntegracaoContinua.Csharp.Teste
 
         [Theory]
         [InlineData("SP", "SP", true)]
-        [InlineData("SP", "01234567", true)]
-        [InlineData("SP", "01234-000", false)]
+        [InlineData("SP", "sp", true)]
+        [InlineData("SP", "MG", false)]
         [InlineData("SP", "any value", false)]
         public void Compare_get_hash_code(string input, string compare, bool expected)
         {
@@ -135,8 +129,8 @@ namespace IntegracaoContinua.Csharp.Teste
         }
 
         [Theory]
-        [InlineData("SP", "01234-000", true)]
-        [InlineData("SP", "01234-678", false)]
+        [InlineData("SP", "MG", true)]
+        [InlineData("SP", "AC", false)]
         public void Compare_greater_than(string input, string compare, bool expected)
         {
             UfType inputValue = new(input);
