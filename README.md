@@ -10,7 +10,7 @@
 ### Azure badge
 
 [![Build Status](https://img.shields.io/azure-devops/build/renatopacheco/IntegracaoContinua.Csharp/7/main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
-[![Pipeline Status](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_apis/build/status/Integration%20Tests?branchName=main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
+[![Pipeline Status](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_apis/build/status/Integration%20Tests?branchName=main&label=Integration%20Tests)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
 [![Coverage Status](https://img.shields.io/azure-devops/coverage/renatopacheco/IntegracaoContinua.Csharp/7/main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
 [![Test Status](https://img.shields.io/azure-devops/tests/renatopacheco/IntegracaoContinua.Csharp/7/main?compact_message&failed_label=failed&passed_label=passed&skipped_label=skipped)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
 
