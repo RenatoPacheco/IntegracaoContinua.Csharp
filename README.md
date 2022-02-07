@@ -5,7 +5,9 @@
 [![Integration Tests](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/workflows/Integration%20Tests/badge.svg?branch=main)](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/actions/workflows/integration-tests.yml)
 [![codecov](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp/branch/main/graph/badge.svg?token=6YLN9GKD8X)](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp)
 
-[![Build Status](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_apis/build/status/Integration%20Tests?branchName=main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
+[![Build Status](https://img.shields.io/azure-devops/build/renatopacheco/IntegracaoContinua.Csharp/7/main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
+[![Pipeline Status](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_apis/build/status/Integration%20Tests?branchName=main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
+[![Coverage Status](https://img.shields.io/azure-devops/coverage/renatopacheco/IntegracaoContinua.Csharp/7/main)](https://renatopacheco.visualstudio.com/IntegracaoContinua.Csharp/_build/latest?definitionId=7&branchName=main)
 
 
 Um projeto para fazer testes de configuração para integração contínua usando [GitHub Actions] e o [Azure Pipelines] além de que todo o projeto será feito com [Vscode], para não depender de recursos do [Visual Studio]. Já o código será feito com [.NET Core 3.1] e os testes em [.NET 5].
@@ -63,3 +65,4 @@ E para não ter de ficar executando cada comando a cada teste que queirar gerar 
 [.NET 5]:<https://docs.microsoft.com/en-us/dotnet/core/whats-new/dotnet-5>
 [Report Generator]:<https://github.com/danielpalme/ReportGenerator>
 [Coverlet]:<https://github.com/coverlet-coverage/coverlet>
+[shields.io]:<https://shields.io/category/coverage>
