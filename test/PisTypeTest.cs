@@ -171,7 +171,6 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(TypeCode.String, compare.GetTypeCode());
         }
         
-        /*
         [Theory]
         [InlineData("844.34617.73-4", typeof(string), true)]
         [InlineData("any value", typeof(string), true)]
@@ -215,6 +214,5 @@ namespace IntegracaoContinua.Csharp.Teste
                 (test as IConvertible).ToType(type, null);
             }
         }
-        */
     }
 }
