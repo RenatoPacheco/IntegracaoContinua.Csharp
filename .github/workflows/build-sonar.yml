@@ -1,10 +1,11 @@
-name: Build
+name: Build Sonar
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-    types: [opened, synchronize, reopened]
+    branches:
+      - main
 jobs:
   build:
     name: Build
