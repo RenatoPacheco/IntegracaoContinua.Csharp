@@ -6,6 +6,7 @@
 [![Build](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/workflows/Build/badge.svg?branch=main)](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/actions/workflows/build.yml)
 [![Integration Tests](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/workflows/Integration%20Tests/badge.svg?branch=main)](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/actions/workflows/integration-tests.yml)
 [![codecov](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp/branch/main/graph/badge.svg?token=6YLN9GKD8X)](https://codecov.io/gh/RenatoPacheco/IntegracaoContinua.Csharp)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=RenatoPacheco_IntegracaoContinua.Csharp&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=RenatoPacheco_IntegracaoContinua.Csharp)
 
 ### Azure badge
 
