@@ -53,5 +53,6 @@ jobs:
           dotnet restore
           dotnet build --configuration Release --no-restore
           dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
-          dotnet "SonarScanner.MSBuild.dll" begin /k:"FeatureToggle.Core" /d:sonar.cs.opencover.reportsPaths="coverage.cobertura.xml" /d:sonar.test.exclusions="coverage/**"
+          dotnet "SonarScanner.MSBuild.dll" begin /k:"FeatureToggle.Core" /d:sonar.cs.vstest.reportsPaths="coverage/*.trx"
+          dotnet "SonarScanner.MSBuild.dll" begin /k:"FeatureToggle.Core" /d:sonar.cs.opencover.reportsPaths="coverage/**/coverage.cobertura.xml"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
