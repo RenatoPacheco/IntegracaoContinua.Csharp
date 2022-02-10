@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+
 jobs:
   build:
     name: Build
@@ -50,5 +52,15 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"RenatoPacheco_IntegracaoContinua.Csharp" /o:"renatopacheco" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet restore
           dotnet build --configuration Release --no-restore
-          dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
+          # Now execute tests with special attention to produce output
+          # that can be easily read by SonarCloud analyzer
+          dotnet test `
+            --collect:"XPlat Code Coverage" `           # cross platform code coverage
+            --results-directory TestResults/ `          # Test Result directory
+            --logger "trx;LogFileName=unittests.trx" `  # Use standard trx format for logger output
+            --no-build `
+            --no-restore `
+            --configuration release `
+            -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover # Special open cover data collector
+          # dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
