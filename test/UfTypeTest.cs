@@ -119,10 +119,13 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_equal_as_object()
         {
+            UfType value = new ("SP");
             UfType compare = new ("SP");
 
-            Assert.False(compare.Equals(null));
-            Assert.False(compare.Equals(compare.ToString()));
+            Assert.False(value.Equals(null));
+            Assert.True(value.Equals(compare));
+            Assert.True(value.Equals(compare as object));
+            Assert.False(value.Equals(compare.ToString()));
         }
 
         [Theory]
@@ -169,9 +172,12 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_greater_than_as_object()
         {
+            UfType value = new ("SP");
             UfType compare = new ("SP");
 
-            Assert.Equal(-1,compare.CompareTo(null));
+            Assert.Equal(-1,value.CompareTo(null));
+            Assert.Equal(0,compare.CompareTo(compare));
+            Assert.Equal(0,compare.CompareTo(compare as object));
             Assert.Equal(-1,compare.CompareTo(compare.ToString()));
         }
 

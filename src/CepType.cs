@@ -99,7 +99,7 @@ namespace IntegracaoContinua.Csharp
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            format = format?.Trim()?.ToUpper();
+            format = format?.Trim().ToUpper();
 
             if (format == null || format == string.Empty)
                 format = "D";
