@@ -177,6 +177,14 @@ namespace IntegracaoContinua.Csharp.Teste
         }
 
         [Fact]
+        public void Check_empty_value()
+        {
+            CepType test = CepType.Empty;
+            Assert.False(test.IsValid());
+            Assert.Equal("00000-000", test.ToString());
+        }
+
+        [Fact]
         public void Compare_greater_than_as_object()
         {
             CepType compare = new ("01234-567");
