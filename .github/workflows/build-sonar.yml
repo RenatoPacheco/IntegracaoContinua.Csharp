@@ -52,7 +52,6 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"RenatoPacheco_IntegracaoContinua.Csharp" /o:"renatopacheco" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet restore
           dotnet build --configuration Release --no-restore
-          dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-          dotnet "SonarScanner.MSBuild.dll" begin /k:"FeatureToggle.Core" /d:sonar.cs.opencover.reportsPaths="coverage.xml" /d:sonar.test.exclusions="test/**"
-          # dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
+          dotnet test --no-build --verbosity normal --logger "trx" --collect:"XPlat Code Coverage" --results-directory ./coverage
+          dotnet "SonarScanner.MSBuild.dll" begin /k:"FeatureToggle.Core" /d:sonar.cs.opencover.reportsPaths="coverage.cobertura.xml" /d:sonar.test.exclusions="coverage/**"
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
