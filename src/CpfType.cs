@@ -314,9 +314,9 @@ namespace IntegracaoContinua.Csharp
         }
 
         /// <internalonly/>
-        object IConvertible.ToType(System.Type type, IFormatProvider provider)
+        object IConvertible.ToType(System.Type conversionType, IFormatProvider provider)
         {
-            return Convert.ChangeType(this, type, provider);
+            return Convert.ChangeType(this, conversionType, provider);
         }
 
         #endregion
