@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using IntegracaoContinua.Csharp.Resources;
 namespace IntegracaoContinua.Csharp
@@ -72,15 +73,16 @@ namespace IntegracaoContinua.Csharp
         /// <returns>A object CepType with a CPF valid</returns>
         public static CepType Generate()
         {
-            string result = string.Empty;
+            StringBuilder result = new StringBuilder();
+            
             for (int i = 0; i < 8; i++) {
                 if (i == 5) {
-                    result += "-";
+                    result.Append("-");
                 }
-                result += new Random().Next(0, 9).ToString();
+                result.Append(new Random().Next(0, 9).ToString());
             }
 
-            return new CepType(result);
+            return new CepType(result.ToString());
         }
         public bool IsValid() => _isValid;
 

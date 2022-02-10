@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 using IntegracaoContinua.Csharp.Resources;
 
@@ -73,11 +74,12 @@ namespace IntegracaoContinua.Csharp
         /// <returns>A object PisType with a PIS valid</returns>
         public static PisType Generate()
         {
-            string partialPis = string.Empty;
+            StringBuilder result = new StringBuilder();
+            
             for (int i = 0; i < 10; i++)
-                partialPis += new Random().Next(0, 9).ToString();
+                result.Append(new Random().Next(0, 9).ToString());
 
-            return GenerateDigit(partialPis);
+            return GenerateDigit(result.ToString());
         }
 
         private static PisType GenerateDigit(string partialPis)

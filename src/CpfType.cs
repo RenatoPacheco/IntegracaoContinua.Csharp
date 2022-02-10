@@ -1,5 +1,6 @@
 ﻿using IntegracaoContinua.Csharp.Resources;
 using System;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace IntegracaoContinua.Csharp
@@ -73,11 +74,12 @@ namespace IntegracaoContinua.Csharp
         /// <returns>A object CpfType with a CPF valid</returns>
         public static CpfType Generate()
         {
-            string partialValue = string.Empty;
+            StringBuilder result = new StringBuilder();
+            
             for (int i = 0; i < 9; i++)
-                partialValue += new Random().Next(0, 9).ToString();
+                result.Append(new Random().Next(0, 9).ToString());
 
-            return GenerateDigit(partialValue);
+            return GenerateDigit(result.ToString());
         }
 
         private static CpfType GenerateDigit(string partialValue)
