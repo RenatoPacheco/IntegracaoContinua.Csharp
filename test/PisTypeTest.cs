@@ -110,7 +110,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("844.34617.73-4", "844.34617.73-4", true)]
         [InlineData("844.34617.73-4", "84434617734", true)]
-        [InlineData("844.34617.73-4", "01234-000", false)]
+        [InlineData("844.34617.73-4", "844.34617.73-2", false)]
         [InlineData("844.34617.73-4", "any value", false)]
         public void Compare_equal(string input, string compare, bool expected)
         {
@@ -124,7 +124,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("844.34617.73-4", "844.34617.73-4", true)]
         [InlineData("844.34617.73-4", "84434617734", true)]
-        [InlineData("844.34617.73-4", "01234-000", false)]
+        [InlineData("844.34617.73-4", "844.34617.73-2", false)]
         [InlineData("844.34617.73-4", "any value", false)]
         public void Compare_get_hash_code(string input, string compare, bool expected)
         {
@@ -152,6 +152,36 @@ namespace IntegracaoContinua.Csharp.Teste
             PisType compareValue = new(compare);
             Assert.Equal(expected, inputValue > compareValue);
             Assert.Equal(!expected, inputValue < compareValue);
+        }
+
+        [Theory]
+        [InlineData("844.34617.73-4", "844.34617.73-2", true)]
+        [InlineData("844.34617.73-4", "844.34617.73-4", true)]
+        [InlineData("844.34617.73-4", "844.34617.73-5", false)]
+        public void Compare_greater_or_qual_than(string input, string compare, bool expected)
+        {
+            PisType inputValue = new(input);
+            PisType compareValue = new(compare);
+            Assert.Equal(expected, inputValue >= compareValue);
+        }        
+
+        [Theory]
+        [InlineData("844.34617.73-2", "844.34617.73-4", true)]
+        [InlineData("844.34617.73-2", "844.34617.73-2", true)]
+        [InlineData("844.34617.73-5", "844.34617.73-4", false)]
+        public void Compare_small_or_qual_than(string input, string compare, bool expected)
+        {
+            PisType inputValue = new(input);
+            PisType compareValue = new(compare);
+            Assert.Equal(expected, inputValue <= compareValue);
+        }
+
+        [Fact]
+        public void Check_empty_value()
+        {
+            PisType test = PisType.Empty;
+            Assert.False(test.IsValid());
+            Assert.Equal("000.00000.00-0", test.ToString());
         }
 
         [Fact]

@@ -123,6 +123,36 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(expected, inputValue.GetHashCode() == compareValue.GetHashCode());
         }
 
+        [Theory]
+        [InlineData("153.179.966-35", "153.179.966-00", true)]
+        [InlineData("153.179.966-35", "153.179.966-35", true)]
+        [InlineData("153.179.966-35", "153.179.966-99", false)]
+        public void Compare_greater_or_qual_than(string input, string compare, bool expected)
+        {
+            CpfType inputValue = new(input);
+            CpfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue >= compareValue);
+        }        
+
+        [Theory]
+        [InlineData("153.179.966-00", "153.179.966-35", true)]
+        [InlineData("153.179.966-00", "153.179.966-00", true)]
+        [InlineData("153.179.966-99", "153.179.966-35", false)]
+        public void Compare_small_or_qual_than(string input, string compare, bool expected)
+        {
+            CpfType inputValue = new(input);
+            CpfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue <= compareValue);
+        }
+
+        [Fact]
+        public void Check_empty_value()
+        {
+            CpfType test = CpfType.Empty;
+            Assert.False(test.IsValid());
+            Assert.Equal("000.000.000-00", test.ToString());
+        } 
+
         [Fact]
         public void Compare_equal_as_object()
         {

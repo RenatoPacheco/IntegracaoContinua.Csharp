@@ -136,6 +136,36 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(!expected, inputValue < compareValue);
         }
 
+        [Theory]
+        [InlineData("SP", "AC", true)]
+        [InlineData("SP", "SP", true)]
+        [InlineData("SP", "TO", false)]
+        public void Compare_greater_or_qual_than(string input, string compare, bool expected)
+        {
+            UfType inputValue = new(input);
+            UfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue >= compareValue);
+        }        
+
+        [Theory]
+        [InlineData("AC", "SP", true)]
+        [InlineData("AC", "AC", true)]
+        [InlineData("TO", "SP", false)]
+        public void Compare_small_or_qual_than(string input, string compare, bool expected)
+        {
+            UfType inputValue = new(input);
+            UfType compareValue = new(compare);
+            Assert.Equal(expected, inputValue <= compareValue);
+        }
+
+        [Fact]
+        public void Check_empty_value()
+        {
+            UfType test = UfType.Empty;
+            Assert.False(test.IsValid());
+            Assert.Equal("", test.ToString());
+        }
+
         [Fact]
         public void Compare_greater_than_as_object()
         {

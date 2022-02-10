@@ -1,7 +1,6 @@
-﻿using IntegracaoContinua.Csharp.Resources;
-using System;
+﻿using System;
 using System.Text.RegularExpressions;
-
+using IntegracaoContinua.Csharp.Resources;
 namespace IntegracaoContinua.Csharp
 {
     public struct CepType
@@ -12,12 +11,16 @@ namespace IntegracaoContinua.Csharp
         {
             TryParse(input, out CepType output);
             this = output;
-            if (!IsValid())
-                _value = input?.Trim() ?? string.Empty;
         }
 
-        private string _value;
-        private bool _isValid;
+        private CepType(string value, bool isValid)
+        {
+            _value = value?.Trim() ?? string.Empty;
+            _isValid = isValid;
+        }
+
+        private readonly string _value;
+        private readonly bool _isValid;
 
         public static explicit operator string(CepType input) => input.ToString();
         public static explicit operator CepType(string input) => new CepType(input);
@@ -25,7 +28,7 @@ namespace IntegracaoContinua.Csharp
         /// <summary>
         /// Return value 000.000.000-00
         /// </summary>
-        public static readonly CepType Empty = new CepType { _value = "000.000.000-00" };
+        public static readonly CepType Empty = new CepType ("00000-000", false);
 
         public static CepType Parse(string input)
         {
@@ -55,15 +58,11 @@ namespace IntegracaoContinua.Csharp
                     input = Regex.Replace(input, @"[^\d]", string.Empty);
                     pattern = @"^(\d{5})(\d{3})$";
                     
-                    output = new CepType
-                    {
-                        _value = Regex.Replace(input, pattern, "$1-$2"),
-                        _isValid = true
-                    };
+                    output = new CepType(Regex.Replace(input, pattern, "$1-$2"), true);
                     return true;
                 }
             }
-            output = Empty;
+            output = new CepType(input, false);
             return false;
         }
 
@@ -165,6 +164,16 @@ namespace IntegracaoContinua.Csharp
         public static bool operator <(CepType left, CepType right)
         {
             return left.CompareTo(right) == -1;
+        }
+
+        public static bool operator >=(CepType left, CepType right)
+        {
+            return left > right || left == right;
+        }
+
+        public static bool operator <=(CepType left, CepType right)
+        {
+            return left < right || left == right;
         }
 
         #region IConvertible implementation

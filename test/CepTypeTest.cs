@@ -154,6 +154,36 @@ namespace IntegracaoContinua.Csharp.Teste
             Assert.Equal(!expected, inputValue < compareValue);
         }
 
+        [Theory]
+        [InlineData("01234-567", "01234-000", true)]
+        [InlineData("01234-567", "01234-567", true)]
+        [InlineData("01234-567", "01234-678", false)]
+        public void Compare_greater_or_qual_than(string input, string compare, bool expected)
+        {
+            CepType inputValue = new(input);
+            CepType compareValue = new(compare);
+            Assert.Equal(expected, inputValue >= compareValue);
+        }        
+
+        [Theory]
+        [InlineData("01234-000", "01234-567", true)]
+        [InlineData("01234-000", "01234-000", true)]
+        [InlineData("01234-678", "01234-567", false)]
+        public void Compare_small_or_qual_than(string input, string compare, bool expected)
+        {
+            CepType inputValue = new(input);
+            CepType compareValue = new(compare);
+            Assert.Equal(expected, inputValue <= compareValue);
+        }
+
+        [Fact]
+        public void Check_empty_value()
+        {
+            CepType test = CepType.Empty;
+            Assert.False(test.IsValid());
+            Assert.Equal("00000-000", test.ToString());
+        }
+
         [Fact]
         public void Compare_greater_than_as_object()
         {
