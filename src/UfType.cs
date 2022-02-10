@@ -12,12 +12,16 @@ namespace IntegracaoContinua.Csharp
         {
             TryParse(input, out UfType output);
             this = output;
-            if (!IsValid())
-                _value = input?.Trim() ?? string.Empty;
+        }        
+
+        private UfType(string value, bool isValid)
+        {
+            _value = value?.Trim() ?? string.Empty;
+            _isValid = isValid;
         }
 
-        private string _value;
-        private bool _isValid;
+        private readonly string _value;
+        private readonly bool _isValid;
 
         public static explicit operator string(UfType input) => input.ToString();
         public static explicit operator UfType(string input) => new UfType(input);
@@ -25,7 +29,7 @@ namespace IntegracaoContinua.Csharp
         /// <summary>
         /// Return value 000.000.000-00
         /// </summary>
-        public static readonly UfType Empty = new UfType { _value = "000.000.000-00" };
+        public static readonly UfType Empty = new UfType("", false);
 
         public static UfType Parse(string input)
         {
@@ -52,15 +56,11 @@ namespace IntegracaoContinua.Csharp
                 string pattern = @"^[a-zA-Z]{2}$";
                 if (Regex.IsMatch(input, pattern))
                 {
-                    output = new UfType
-                    {
-                        _value = input.ToUpper(),
-                        _isValid = true
-                    };
+                    output = new UfType(input.ToUpper(), true);
                     return true;
                 }
             }
-            output = Empty;
+            output = new UfType(input, false);
             return false;
         }
         
@@ -128,6 +128,16 @@ namespace IntegracaoContinua.Csharp
         public static bool operator <(UfType left, UfType right)
         {
             return left.CompareTo(right) == -1;
+        }
+
+        public static bool operator >=(UfType left, UfType right)
+        {
+            return left > right || left == right;
+        }
+
+        public static bool operator <=(UfType left, UfType right)
+        {
+            return left < right || left == right;
         }
 
         #region IConvertible implementation

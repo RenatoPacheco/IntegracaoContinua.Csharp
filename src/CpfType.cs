@@ -12,12 +12,16 @@ namespace IntegracaoContinua.Csharp
         {
             TryParse(input, out CpfType output);
             this = output;
-            if (!IsValid())
-                _value = input?.Trim() ?? string.Empty;
         }
 
-        private string _value;
-        private bool _isValid;
+        private CpfType(string value, bool isValid)
+        {
+            _value = value?.Trim() ?? string.Empty;
+            _isValid = isValid;
+        }
+
+        private readonly string _value;
+        private readonly bool _isValid;
 
         public static explicit operator string(CpfType input) => input.ToString();
         public static explicit operator CpfType(string input) => new CpfType(input);
@@ -25,7 +29,7 @@ namespace IntegracaoContinua.Csharp
         /// <summary>
         /// Return value 000.000.000-00
         /// </summary>
-        public static readonly CpfType Empty = new CpfType { _value = "000.000.000-00" };
+        public static readonly CpfType Empty = new CpfType("000.000.000-00", false);
 
         public static CpfType Parse(string input)
         {
@@ -52,14 +56,14 @@ namespace IntegracaoContinua.Csharp
                 string pattern = @"^\d{3}[\. ]?\d{3}[\. ]?\d{3}[\- ]?\d{2}$";
                 if (Regex.IsMatch(input, pattern))
                 {
-                    input = Regex.Replace(input, @"[^\d]", string.Empty);
-                    output = GenerateDigit(input.Substring(0, 9));
+                    string newValue = Regex.Replace(input, @"[^\d]", string.Empty);
+                    output = GenerateDigit(newValue.Substring(0, 9));
 
-                    if (output.ToString("N") == input)
+                    if (output.ToString("N") == newValue)
                         return true;
                 }
             }
-            output = Empty;
+            output = new CpfType(input, false);
             return false;
         }
 
@@ -108,13 +112,10 @@ namespace IntegracaoContinua.Csharp
             digito = digito + resto.ToString();
 
             string pattern = @"^(\d{3})(\d{3})(\d{3})(\d{2})$";
-            return new CpfType
-            {
-                _value = Regex.Replace(
-                    partialValue + digito,
-                    pattern, "$1.$2.$3-$4"),
-                _isValid = true
-            };
+            string tempValue = Regex.Replace(
+                partialValue + digito, pattern, "$1.$2.$3-$4");
+
+            return new CpfType(tempValue, true);
         }
 
         public bool IsValid() => _isValid;
@@ -199,6 +200,17 @@ namespace IntegracaoContinua.Csharp
         public static bool operator <(CpfType left, CpfType right)
         {
             return left.CompareTo(right) == -1;
+        }
+        
+
+        public static bool operator >=(CpfType left, CpfType right)
+        {
+            return left > right || left == right;
+        }
+
+        public static bool operator <=(CpfType left, CpfType right)
+        {
+            return left < right || left == right;
         }
 
         #region IConvertible implementation

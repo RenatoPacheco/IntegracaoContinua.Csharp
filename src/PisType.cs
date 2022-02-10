@@ -12,12 +12,16 @@ namespace IntegracaoContinua.Csharp
         {
             TryParse(input, out PisType output);
             this = output;
-            if (!IsValid())
-                _value = input?.Trim() ?? string.Empty;
+        }        
+
+        private PisType(string value, bool isValid)
+        {
+            _value = value?.Trim() ?? string.Empty;
+            _isValid = isValid;
         }
 
-        private string _value;
-        private bool _isValid;
+        private readonly string _value;
+        private readonly bool _isValid;
 
         public static explicit operator string(PisType input) => input.ToString();
         public static explicit operator PisType(string input) => new PisType(input);
@@ -25,7 +29,7 @@ namespace IntegracaoContinua.Csharp
         /// <summary>
         /// Return value 000.00000.00-0
         /// </summary>
-        public static readonly PisType Empty = new PisType { _value = "000.00000.00-0" };
+        public static readonly PisType Empty = new PisType("000.00000.00-0", false);
 
         public static PisType Parse(string input)
         {
@@ -52,14 +56,14 @@ namespace IntegracaoContinua.Csharp
                 string pattern = @"^\d{3}[\. ]?\d{5}[\. ]?\d{2}[\- ]?\d{1}$";
                 if (Regex.IsMatch(input, pattern))
                 {
-                    input = Regex.Replace(input, @"[^\d]", string.Empty);
-                    output = GenerateDigit(input.Substring(0, 10));
+                    string newValue = Regex.Replace(input, @"[^\d]", string.Empty);
+                    output = GenerateDigit(newValue.Substring(0, 10));
 
-                    if (output.ToString("N") == input)
+                    if (output.ToString("N") == newValue)
                         return true;
                 }
             }
-            output = Empty;
+            output = new PisType(input, false);
             return false;
         }
 
@@ -92,13 +96,10 @@ namespace IntegracaoContinua.Csharp
                 resto = 11 - resto;
 
             string pattern = @"^(\d{3})(\d{5})(\d{2})(\d{1})$";
-            return new PisType
-            {
-                _value = Regex.Replace(
-                    partialPis + resto,
-                    pattern, "$1.$2.$3-$4"),
-                _isValid = true
-            };
+            string tempValue = Regex.Replace(
+                    partialPis + resto, pattern, "$1.$2.$3-$4");
+            
+            return new PisType(tempValue, true);
         }
 
         public bool IsValid() => _isValid;
@@ -183,6 +184,16 @@ namespace IntegracaoContinua.Csharp
         public static bool operator <(PisType left, PisType right)
         {
             return left.CompareTo(right) == -1;
+        }
+
+        public static bool operator >=(PisType left, PisType right)
+        {
+            return left > right || left == right;
+        }
+
+        public static bool operator <=(PisType left, PisType right)
+        {
+            return left < right || left == right;
         }
 
         #region IConvertible implementation
