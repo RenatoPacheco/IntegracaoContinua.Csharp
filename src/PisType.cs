@@ -17,12 +17,12 @@ namespace IntegracaoContinua.Csharp
 
         private PisType(string value, bool isValid)
         {
-            _value = value?.Trim() ?? string.Empty;
-            _isValid = isValid;
+            _pisValue = value?.Trim() ?? string.Empty;
+            _pisIsValid = isValid;
         }
 
-        private readonly string _value;
-        private readonly bool _isValid;
+        private readonly string _pisValue;
+        private readonly bool _pisIsValid;
 
         public static explicit operator string(PisType input) => input.ToString();
         public static explicit operator PisType(string input) => new PisType(input);
@@ -105,7 +105,7 @@ namespace IntegracaoContinua.Csharp
             return new PisType(tempValue, true);
         }
 
-        public bool IsValid() => _isValid;
+        public bool IsValid() => _pisIsValid;
 
         public override string ToString()
         {
@@ -133,10 +133,10 @@ namespace IntegracaoContinua.Csharp
             switch (check)
             {
                 case 'D':
-                    return _value;
+                    return _pisValue;
 
                 case 'N':
-                    return Regex.Replace(_value, @"[^\d]", string.Empty);
+                    return Regex.Replace(_pisValue, @"[^\d]", string.Empty);
 
                 default:
                     throw new ArgumentException(
@@ -146,12 +146,12 @@ namespace IntegracaoContinua.Csharp
 
         public override int GetHashCode()
         {
-            return $"{_value}:{GetType()}".GetHashCode();
+            return $"{_pisValue}:{GetType()}".GetHashCode();
         }
 
         public bool Equals(PisType other)
         {
-            return _value == other._value;
+            return _pisValue == other._pisValue;
         }
 
         public override bool Equals(object obj)
@@ -161,7 +161,7 @@ namespace IntegracaoContinua.Csharp
 
         public int CompareTo(PisType other)
         {
-            return _value.CompareTo(other._value);
+            return _pisValue.CompareTo(other._pisValue);
         }
 
         public int CompareTo(object obj)
@@ -209,91 +209,91 @@ namespace IntegracaoContinua.Csharp
         /// <internalonly/>
         string IConvertible.ToString(IFormatProvider provider)
         {
-            return _value;
+            return _pisValue;
         }
 
         /// <internalonly/>
         bool IConvertible.ToBoolean(IFormatProvider provider)
         {
-            return Convert.ToBoolean(_value);
+            return Convert.ToBoolean(_pisValue);
         }
 
         /// <internalonly/>
         char IConvertible.ToChar(IFormatProvider provider)
         {
-            return Convert.ToChar(_value);
+            return Convert.ToChar(_pisValue);
         }
 
         /// <internalonly/>
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
-            return Convert.ToSByte(_value);
+            return Convert.ToSByte(_pisValue);
         }
 
         /// <internalonly/>
         byte IConvertible.ToByte(IFormatProvider provider)
         {
-            return Convert.ToByte(_value);
+            return Convert.ToByte(_pisValue);
         }
 
         /// <internalonly/>
         short IConvertible.ToInt16(IFormatProvider provider)
         {
-            return Convert.ToInt16(_value);
+            return Convert.ToInt16(_pisValue);
         }
 
         /// <internalonly/>
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
-            return Convert.ToUInt16(_value);
+            return Convert.ToUInt16(_pisValue);
         }
 
         /// <internalonly/>
         int IConvertible.ToInt32(IFormatProvider provider)
         {
-            return Convert.ToInt32(_value);
+            return Convert.ToInt32(_pisValue);
         }
 
         /// <internalonly/>
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
-            return Convert.ToUInt32(_value);
+            return Convert.ToUInt32(_pisValue);
         }
 
         /// <internalonly/>
         long IConvertible.ToInt64(IFormatProvider provider)
         {
-            return Convert.ToInt64(_value);
+            return Convert.ToInt64(_pisValue);
         }
 
         /// <internalonly/>
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
-            return Convert.ToUInt64(_value);
+            return Convert.ToUInt64(_pisValue);
         }
 
         /// <internalonly/>
         float IConvertible.ToSingle(IFormatProvider provider)
         {
-            return Convert.ToSingle(_value);
+            return Convert.ToSingle(_pisValue);
         }
 
         /// <internalonly/>
         double IConvertible.ToDouble(IFormatProvider provider)
         {
-            return Convert.ToDouble(_value);
+            return Convert.ToDouble(_pisValue);
         }
 
         /// <internalonly/>
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
-            return Convert.ToDecimal(_value);
+            return Convert.ToDecimal(_pisValue);
         }
 
         /// <internalonly/>
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
-            return Convert.ToDateTime(_value);
+            return Convert.ToDateTime(_pisValue);
         }
 
         /// <internalonly/>

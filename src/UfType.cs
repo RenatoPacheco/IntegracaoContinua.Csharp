@@ -16,12 +16,12 @@ namespace IntegracaoContinua.Csharp
 
         private UfType(string value, bool isValid)
         {
-            _value = value?.Trim() ?? string.Empty;
-            _isValid = isValid;
+            _ufValue = value?.Trim() ?? string.Empty;
+            _ufIsValid = isValid;
         }
 
-        private readonly string _value;
-        private readonly bool _isValid;
+        private readonly string _ufValue;
+        private readonly bool _ufIsValid;
 
         public static explicit operator string(UfType input) => input.ToString();
         public static explicit operator UfType(string input) => new UfType(input);
@@ -64,7 +64,7 @@ namespace IntegracaoContinua.Csharp
             return false;
         }
         
-        public bool IsValid() => _isValid;
+        public bool IsValid() => _ufIsValid;
 
         public override string ToString()
         {
@@ -79,7 +79,7 @@ namespace IntegracaoContinua.Csharp
         public string ToString(string format, IFormatProvider formatProvider)
         {
             if (format == string.Empty || format == null)
-                return _value;
+                return _ufValue;
             else
                 throw new ArgumentException(
                     nameof(format), Resource.TheValueIsNotValid);
@@ -87,12 +87,12 @@ namespace IntegracaoContinua.Csharp
 
         public override int GetHashCode()
         {
-            return $"{_value}:{GetType()}".GetHashCode();
+            return $"{_ufValue}:{GetType()}".GetHashCode();
         }
 
         public bool Equals(UfType other)
         {
-            return _value == other._value;
+            return _ufValue == other._ufValue;
         }
 
         public override bool Equals(object obj)
@@ -102,7 +102,7 @@ namespace IntegracaoContinua.Csharp
 
         public int CompareTo(UfType other)
         {
-            return _value.CompareTo(other._value);
+            return _ufValue.CompareTo(other._ufValue);
         }
 
         public int CompareTo(object obj)
@@ -150,91 +150,91 @@ namespace IntegracaoContinua.Csharp
         /// <internalonly/>
         string IConvertible.ToString(IFormatProvider provider)
         {
-            return _value;
+            return _ufValue;
         }
 
         /// <internalonly/>
         bool IConvertible.ToBoolean(IFormatProvider provider)
         {
-            return Convert.ToBoolean(_value);
+            return Convert.ToBoolean(_ufValue);
         }
 
         /// <internalonly/>
         char IConvertible.ToChar(IFormatProvider provider)
         {
-            return Convert.ToChar(_value);
+            return Convert.ToChar(_ufValue);
         }
 
         /// <internalonly/>
         sbyte IConvertible.ToSByte(IFormatProvider provider)
         {
-            return Convert.ToSByte(_value);
+            return Convert.ToSByte(_ufValue);
         }
 
         /// <internalonly/>
         byte IConvertible.ToByte(IFormatProvider provider)
         {
-            return Convert.ToByte(_value);
+            return Convert.ToByte(_ufValue);
         }
 
         /// <internalonly/>
         short IConvertible.ToInt16(IFormatProvider provider)
         {
-            return Convert.ToInt16(_value);
+            return Convert.ToInt16(_ufValue);
         }
 
         /// <internalonly/>
         ushort IConvertible.ToUInt16(IFormatProvider provider)
         {
-            return Convert.ToUInt16(_value);
+            return Convert.ToUInt16(_ufValue);
         }
 
         /// <internalonly/>
         int IConvertible.ToInt32(IFormatProvider provider)
         {
-            return Convert.ToInt32(_value);
+            return Convert.ToInt32(_ufValue);
         }
 
         /// <internalonly/>
         uint IConvertible.ToUInt32(IFormatProvider provider)
         {
-            return Convert.ToUInt32(_value);
+            return Convert.ToUInt32(_ufValue);
         }
 
         /// <internalonly/>
         long IConvertible.ToInt64(IFormatProvider provider)
         {
-            return Convert.ToInt64(_value);
+            return Convert.ToInt64(_ufValue);
         }
 
         /// <internalonly/>
         ulong IConvertible.ToUInt64(IFormatProvider provider)
         {
-            return Convert.ToUInt64(_value);
+            return Convert.ToUInt64(_ufValue);
         }
 
         /// <internalonly/>
         float IConvertible.ToSingle(IFormatProvider provider)
         {
-            return Convert.ToSingle(_value);
+            return Convert.ToSingle(_ufValue);
         }
 
         /// <internalonly/>
         double IConvertible.ToDouble(IFormatProvider provider)
         {
-            return Convert.ToDouble(_value);
+            return Convert.ToDouble(_ufValue);
         }
 
         /// <internalonly/>
         decimal IConvertible.ToDecimal(IFormatProvider provider)
         {
-            return Convert.ToDecimal(_value);
+            return Convert.ToDecimal(_ufValue);
         }
 
         /// <internalonly/>
         DateTime IConvertible.ToDateTime(IFormatProvider provider)
         {
-            return Convert.ToDateTime(_value);
+            return Convert.ToDateTime(_ufValue);
         }
 
         /// <internalonly/>
