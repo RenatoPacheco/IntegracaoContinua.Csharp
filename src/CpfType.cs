@@ -75,9 +75,10 @@ namespace IntegracaoContinua.Csharp
         public static CpfType Generate()
         {
             StringBuilder result = new StringBuilder();
+            Random rdm = new Random();
             
             for (int i = 0; i < 9; i++)
-                result.Append(new Random().Next(0, 9).ToString());
+                result.Append(rdm.Next(0, 9).ToString());
 
             return GenerateDigit(result.ToString());
         }

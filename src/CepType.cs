@@ -74,12 +74,13 @@ namespace IntegracaoContinua.Csharp
         public static CepType Generate()
         {
             StringBuilder result = new StringBuilder();
+            Random rdm = new Random();
             
             for (int i = 0; i < 8; i++) {
                 if (i == 5) {
                     result.Append("-");
                 }
-                result.Append(new Random().Next(0, 9).ToString());
+                result.Append(rdm.Next(0, 9).ToString());
             }
 
             return new CepType(result.ToString());
