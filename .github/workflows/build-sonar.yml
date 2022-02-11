@@ -49,7 +49,7 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          .\.sonar\scanner\dotnet-sonarscanner begin /k:"RenatoPacheco_IntegracaoContinua.Csharp" /o:"renatopacheco" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="test\coverage.opencover.xml" /d:sonar.cs.vstest.reportsPaths="test\TestResults\report.trx"
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"RenatoPacheco_IntegracaoContinua.Csharp" /o:"renatopacheco" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="test\coverage.opencover.xml" /d:sonar.cs.vstest.reportsPaths="test\TestResults\report.trx" /d:sonar.cpd.exclusions="**/generated/**"
           dotnet restore
           dotnet build --configuration Release --no-restore
           dotnet test -l "trx;LogFileName=report.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=opencover

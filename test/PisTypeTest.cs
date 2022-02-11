@@ -24,6 +24,7 @@ namespace IntegracaoContinua.Csharp.Teste
         [InlineData("844.34617.73-48")]
         [InlineData("84434617")]
         [InlineData("844.34617-abc")]
+        [InlineData("000.00000.00-0")]
         public void Check_format_is_invalid(string input)
         {
             PisType test = new(input);
@@ -136,11 +137,14 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_equal_as_object()
         {
+            PisType value = new ("844.34617.73-4");
             PisType compare = new ("844.34617.73-4");
 
-            Assert.False(compare.Equals(null));
-            Assert.False(compare.Equals(compare.ToString()));
-            Assert.False(compare.Equals(compare.ToString("n")));
+            Assert.False(value.Equals(null));
+            Assert.True(value.Equals(compare));
+            Assert.True(value.Equals(compare as object));
+            Assert.False(value.Equals(compare.ToString()));
+            Assert.False(value.Equals(compare.ToString("n")));
         }
 
         [Theory]
@@ -187,11 +191,14 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_greater_than_as_object()
         {
+            PisType value = new ("844.34617.73-4");
             PisType compare = new ("844.34617.73-4");
 
-            Assert.Equal(-1,compare.CompareTo(null));
-            Assert.Equal(-1,compare.CompareTo(compare.ToString()));
-            Assert.Equal(-1,compare.CompareTo(compare.ToString("n")));
+            Assert.Equal(-1,value.CompareTo(null));
+            Assert.Equal(0,value.CompareTo(compare));
+            Assert.Equal(0,value.CompareTo(compare as object));
+            Assert.Equal(-1,value.CompareTo(compare.ToString()));
+            Assert.Equal(-1,value.CompareTo(compare.ToString("n")));
         }
 
         [Fact]

@@ -90,8 +90,11 @@ namespace IntegracaoContinua.Csharp.Teste
         [Theory]
         [InlineData("01234-567", null, "01234-567")]
         [InlineData("01234-567", "", "01234-567")]
+        [InlineData("01234-567", "    ", "01234-567")]
         [InlineData("01234-567", "d", "01234-567")]
         [InlineData("01234-567", "n", "01234567")]
+        [InlineData("01234-567", "D", "01234-567")]
+        [InlineData("01234-567", "N", "01234567")]
         public void Check_to_string_format(string input, string format, string expected)
         {
             CepType test = new(input);
@@ -136,11 +139,14 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_equal_as_object()
         {
+            CepType value = new ("01234-567");
             CepType compare = new ("01234-567");
 
-            Assert.False(compare.Equals(null));
-            Assert.False(compare.Equals(compare.ToString()));
-            Assert.False(compare.Equals(compare.ToString("n")));
+            Assert.False(value.Equals(null));
+            Assert.True(value.Equals(compare));
+            Assert.True(value.Equals(compare as object));
+            Assert.False(value.Equals(compare.ToString()));
+            Assert.False(value.Equals(compare.ToString("n")));
         }
 
         [Theory]
@@ -187,11 +193,14 @@ namespace IntegracaoContinua.Csharp.Teste
         [Fact]
         public void Compare_greater_than_as_object()
         {
+            CepType value = new ("01234-567");
             CepType compare = new ("01234-567");
 
-            Assert.Equal(-1,compare.CompareTo(null));
-            Assert.Equal(-1,compare.CompareTo(compare.ToString()));
-            Assert.Equal(-1,compare.CompareTo(compare.ToString("n")));
+            Assert.Equal(-1,value.CompareTo(null));
+            Assert.Equal(0,value.CompareTo(compare));
+            Assert.Equal(0,value.CompareTo(compare as object));
+            Assert.Equal(-1,value.CompareTo(compare.ToString()));
+            Assert.Equal(-1,value.CompareTo(compare.ToString("n")));
         }
 
         [Fact]
@@ -200,7 +209,6 @@ namespace IntegracaoContinua.Csharp.Teste
             CepType compare = new ("01234-567");
             Assert.Equal(TypeCode.String, compare.GetTypeCode());
         }
-        
 
         [Theory]
         [InlineData("01234-567", typeof(string), true)]

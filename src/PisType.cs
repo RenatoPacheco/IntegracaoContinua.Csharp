@@ -59,9 +59,11 @@ namespace IntegracaoContinua.Csharp
                 {
                     string newValue = Regex.Replace(input, @"[^\d]", string.Empty);
                     output = GenerateDigit(newValue.Substring(0, 10));
-
-                    if (output.ToString("N") == newValue)
+                    if (Regex.IsMatch(newValue, @"[^0]") 
+                        && output.ToString("N") == newValue)
+                    {
                         return true;
+                    }
                 }
             }
             output = new PisType(input, false);
@@ -119,7 +121,7 @@ namespace IntegracaoContinua.Csharp
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            format = format?.Trim()?.ToUpper();
+            format = format?.Trim().ToUpper();
 
             if (format == null || format == string.Empty)
                 format = "D";
