@@ -31,9 +31,8 @@ jobs:
     - name: Publish to Nuget
       run: dotnet nuget push "**/*.nupkg" --source https://api.nuget.org/v3/index.json --api-key ${{secrets.API_KEY_NUGET}} --skip-duplicate
 
-    - name: Prep packages to Github
-      if: success() || failure() 
-      run: dotnet nuget add source --username RenatoPacheco --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/RenatoPacheco/index.json"
-    
     - name: Publish to GitHub
-      run: dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }}  --source "github" --skip-duplicate
+      if: success() || failure() 
+      run: |
+              dotnet nuget add source --username RenatoPacheco --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/RenatoPacheco/index.json"
+              dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }}  --source "github" --skip-duplicate
