@@ -18,7 +18,13 @@
       - Alguma observação para teste
     </PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>validation;netcore</PackageTags>
   </PropertyGroup>
+  
+  <ItemGroup>
+      <None Include="..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Resources\Resource.Designer.cs">
