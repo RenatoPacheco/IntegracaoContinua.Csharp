@@ -50,7 +50,7 @@ A partir da execução, o comando irá gerar um relatório de testes no diretór
 Porém, a partir da segunda execução, pode haver problemas no relatório, pois ele lê todos os XMLs que encontrar no diretório, e não só o gerado pela primeira execução. Para resolver isso, é necessário apagar o diretório **./coverage** e executar o comando novamente. 
 
 ```bash
-rm -rf ./coverage
+rm -rf ./coverage ./test/bin ./src/bin
 dotnet restore
 dotnet build --configuration=Release --no-restore
 dotnet test --no-build --verbosity=normal --collect:"XPlat Code Coverage" --results-directory ./coverage
