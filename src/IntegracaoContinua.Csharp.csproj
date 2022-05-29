@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Renato Pacheco</Authors>
     <PackageProjectUrl></PackageProjectUrl>
     <NeutralLanguage>en</NeutralLanguage>
@@ -10,13 +10,14 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>../nuget</PackageOutputPath>
     <Description>
-      - Read about in [GitHub README](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md)
-      - Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
+      Read about in [GitHub README](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md)
+      Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
     </Description>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/RenatoPacheco/IntegracaoContinua.Csharp</RepositoryUrl>
     <PackageReleaseNotes>
-      - Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
+      Read about in [GitHub README](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md)
+      Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
     </PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
