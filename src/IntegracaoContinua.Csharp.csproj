@@ -9,11 +9,14 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>../nuget</PackageOutputPath>
-    <Description>Read about in: https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md</Description>
+    <Description>
+      - Read about in [GitHub README](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md)
+      - Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
+    </Description>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/RenatoPacheco/IntegracaoContinua.Csharp</RepositoryUrl>
     <PackageReleaseNotes>
-      Read release in: https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md
+      - Read release in [GitHub RELEASES](https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md)
     </PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
