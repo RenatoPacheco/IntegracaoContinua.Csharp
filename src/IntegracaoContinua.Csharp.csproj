@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,21 +9,21 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageOutputPath>../nuget</PackageOutputPath>
-    <Description>Project for test.</Description>
+    <Description>Read about in: https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/README.md</Description>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/RenatoPacheco/IntegracaoContinua.Csharp</RepositoryUrl>
     <PackageReleaseNotes>
-      Release:
-
-      - Alguma observação para teste
+      Read release in: https://github.com/RenatoPacheco/IntegracaoContinua.Csharp/blob/master/RELEASES.md
     </PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>validation;netcore</PackageTags>
   </PropertyGroup>
   
   <ItemGroup>
-      <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\RELEASES.md" Pack="true" PackagePath="\"/>
   </ItemGroup>
 
   <ItemGroup>
